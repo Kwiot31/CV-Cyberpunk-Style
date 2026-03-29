@@ -2,6 +2,9 @@
 
 Moje interaktywne CV stworzone w klimacie **Cyberpunk 2077**. Projekt łączy nowoczesny web development z futurystycznym designem, wykorzystując efekty neonowe i estetykę Night City.
 
+
+## 🌐 Zobacz na żywo
+Projekt jest dostępny pod adresem: **[kwiatu-dev.pl](https://kwiatu-dev.pl)**
 ---
 
 ## 🛠️ Technologie
