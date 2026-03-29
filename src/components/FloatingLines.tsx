@@ -53,14 +53,15 @@ const FloatingLines: React.FC<FloatingLinesProps> = ({
       lines.forEach(line => {
         ctx.beginPath();
         ctx.strokeStyle = color.replace('0.3', line.opacity.toString());
-        ctx.lineWidth = 3; // Grubsze linie
+        ctx.lineWidth = 2; // Nieco cieńsze dla wydajności
         ctx.lineCap = 'round';
         
-        // Dodanie poświaty dla grubszych linii
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = color;
+        // Optymalizacja: Rysuj poświatę tylko dla najbardziej widocznych linii
+        if (line.opacity > 0.4) {
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = color;
+        }
         
-        // Obliczanie końca linii na podstawie kąta
         const endX = line.x + Math.cos(line.angle) * line.length;
         const endY = line.y + Math.sin(line.angle) * line.length;
 
@@ -68,13 +69,11 @@ const FloatingLines: React.FC<FloatingLinesProps> = ({
         ctx.lineTo(endX, endY);
         ctx.stroke();
         
-        ctx.shadowBlur = 0; // Reset blasku dla optymalizacji
+        ctx.shadowBlur = 0;
 
-        // Ruch
         line.x += Math.cos(line.angle) * line.speed;
         line.y += Math.sin(line.angle) * line.speed;
 
-        // Resetowanie pozycji po wyjściu poza ekran
         if (line.x < -line.length) line.x = canvas.width;
         if (line.x > canvas.width + line.length) line.x = -line.length;
         if (line.y < -line.length) line.y = canvas.height;
