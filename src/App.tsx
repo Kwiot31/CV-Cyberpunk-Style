@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Mail,
   Phone,
-  Github,
   Linkedin,
   MapPin,
   Briefcase,
@@ -17,8 +16,6 @@ import {
   Cpu,
   Globe,
 } from "lucide-react";
-import Lightning from "./components/Lightning";
-import GridScan from "./components/GridScan";
 import FloatingLines from "./components/FloatingLines";
 import { translations } from "./translations";
 
@@ -44,13 +41,15 @@ const Section = ({
   title,
   icon,
   children,
+  headerClassName = "",
 }: {
   title: string;
   icon: React.ReactNode;
   children: React.ReactNode;
+  headerClassName?: string;
 }) => (
-  <section className="mb-10 md:mb-14">
-    <div className="flex items-center gap-3 md:gap-5 mb-6 md:mb-8">
+  <section className="mb-10 md:mb-14 relative">
+    <div className={`relative z-10 flex items-center gap-3 md:gap-5 mb-6 md:mb-8 ${headerClassName}`}>
       <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-green-500/20 flex items-center justify-center text-green-400 border border-green-500/40 shadow-[0_0_25px_rgba(34,197,94,0.2)]">
         {React.cloneElement(icon as React.ReactElement, { size: 20 })}
       </div>
@@ -58,7 +57,7 @@ const Section = ({
         {title}
       </h2>
     </div>
-    <div className="space-y-6">{children}</div>
+    <div className="space-y-6 relative z-10">{children}</div>
   </section>
 );
 
@@ -74,7 +73,7 @@ const ExperienceItem = ({
     <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight mb-2 group-hover:text-green-300 transition-colors">
       {role}
     </h3>
-    <div className="flex items-center gap-3 text-green-400 text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-4 md:mb-5 bg-green-500/10 py-1 px-3 rounded-lg w-fit border border-green-500/20 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+    <div className="flex items-center gap-3 text-green-400 text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-4 md:mb-5 py-1 px-0 rounded-lg w-fit transition-all group-hover:text-green-300">
       {company} <span className="text-zinc-700 font-normal">|</span> {period}
     </div>
     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-medium max-w-2xl mb-6 group-hover:text-zinc-200 transition-colors">
@@ -103,6 +102,44 @@ const SocialIcon = ({ icon, href = "#" }: any) => (
     {React.cloneElement(icon, { size: 24 })}
   </a>
 );
+
+const RevealableContact = ({ icon, value, href, revealed, onReveal }: any) => {
+  const mask = (val: string) => val.replace(/[^\s]/g, "•");
+
+  const handleReveal = () => {
+    if (onReveal) onReveal();
+  };
+
+  const content = (
+    <div className="flex items-center gap-2 md:gap-3">
+      {React.cloneElement(icon, { size: 14, className: "text-green-500 md:w-4 md:h-4" })}
+      <span className={`transition-all duration-500 ${revealed ? "text-white" : "text-zinc-600 font-mono tracking-widest"}`}>
+        {revealed ? value : mask(value)}
+      </span>
+    </div>
+  );
+
+  if (!revealed) {
+    return (
+      <button 
+        onClick={handleReveal}
+        className="group flex items-center gap-2 hover:opacity-100 transition-opacity"
+      >
+        {content}
+      </button>
+    );
+  }
+
+  if (href) {
+    return (
+      <a href={href} className="hover:text-green-400 transition-all text-white animate-in fade-in duration-500">
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="text-zinc-400 animate-in fade-in duration-500">{content}</div>;
+};
 
 const LanguageSelector = ({ onSelect }: { onSelect: (lang: "pl" | "en") => void }) => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#010101] overflow-hidden">
@@ -150,6 +187,7 @@ const LanguageSelector = ({ onSelect }: { onSelect: (lang: "pl" | "en") => void 
 
 export default function App() {
   const [lang, setLang] = useState<"pl" | "en" | null>(null);
+  const [anyRevealed, setAnyRevealed] = useState(false);
 
   useEffect(() => {
     const savedLang = localStorage.getItem("preferredLanguage") as "pl" | "en";
@@ -228,43 +266,48 @@ export default function App() {
                 </span>
               </p>
 
-              <div className="flex flex-wrap justify-center lg:justify-start gap-6 md:gap-10 text-[9px] md:text-[11px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase opacity-80">
-                <a
-                  href="mailto:kubakwiat31@gmail.com"
-                  className="flex items-center gap-2 md:gap-3 hover:text-green-400 transition-all text-white"
-                >
-                  <Mail size={14} className="text-green-500 md:w-4 md:h-4" />{" "}
-                  kubakwiat31@gmail.com
-                </a>
-                <a
-                  href="tel:+48575418810"
-                  className="flex items-center gap-2 md:gap-3 hover:text-green-400 transition-all text-white"
-                >
-                  <Phone size={14} className="text-green-500 md:w-4 md:h-4" /> +48 575 418 810
-                </a>
-                <div className="flex items-center gap-2 md:gap-3 text-zinc-400">
-                  <MapPin size={14} className="text-green-500 md:w-4 md:h-4" /> {t.location}
-                </div>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 md:gap-10 text-[9px] md:text-[11px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase opacity-80">
+                <RevealableContact 
+                  icon={<Mail />} 
+                  value="kubakwiat31@gmail.com" 
+                  href="mailto:kubakwiat31@gmail.com" 
+                  revealed={anyRevealed}
+                  onReveal={() => setAnyRevealed(true)}
+                />
+                <RevealableContact 
+                  icon={<Phone />} 
+                  value="+48 575 418 810" 
+                  href="tel:+48575418810" 
+                  revealed={anyRevealed}
+                  onReveal={() => setAnyRevealed(true)}
+                />
+                <RevealableContact 
+                  icon={<MapPin />} 
+                  value={t.location} 
+                  revealed={anyRevealed}
+                  onReveal={() => setAnyRevealed(true)}
+                />
+                {!anyRevealed && (
+                  <button 
+                    onClick={() => setAnyRevealed(true)}
+                    className="text-[7px] md:text-[8px] text-green-500 animate-pulse tracking-[0.3em] font-black px-2 py-1 border border-green-500/50 rounded-md hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-300"
+                  >
+                    [ CLICK TO DECRYPT ]
+                  </button>
+                )}
               </div>
             </div>
 
             <div className="flex flex-row lg:flex-col gap-4 md:gap-6 relative z-10">
               <SocialIcon
-                icon={<Github />}
-                href="https://github.com/Kwiot31/CV-Cyberpunk-Style"
-              />
-              <SocialIcon
                 icon={<Linkedin />}
-                href="https://github.com/Kwiot31/CV-Cyberpunk-Style"
+                href="https://www.linkedin.com/in/jakub-kwiatkowski-73200b23b/"
               />
             </div>
           </div>
 
-          {/* TREŚĆ Z POŚWIATĄ */}
+          {/* TREŚĆ BEZ POŚWIATY */}
           <div className="relative grid grid-cols-1 lg:grid-cols-12 bg-black/40 overflow-hidden">
-            {/* Blask w tle sekcji głównej */}
-            <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-green-600/5 blur-[130px] rounded-full pointer-events-none" />
-
             {/* LEWA KOLUMNA */}
             <div className="lg:col-span-4 p-6 md:p-20 border-r border-white/5 bg-green-500/[0.02] relative z-10">
               <Section title={t.sections.about} icon={<Code2 size={24} />}>
@@ -275,6 +318,29 @@ export default function App() {
                   <p className="text-xs md:text-sm leading-relaxed text-zinc-200 font-medium whitespace-pre-line">
                     {t.about.text}
                   </p>
+                </div>
+              </Section>
+
+              <Section title={t.sections.skills} icon={<Layers size={24} />}>
+                <div className="space-y-4">
+                  {Object.entries(t.skills).map(([key, value]: [string, any]) => (
+                    <div key={key} className="p-4 rounded-xl bg-green-500/[0.02] border border-green-500/10 hover:border-green-500/30 transition-colors">
+                      <p className="text-[10px] md:text-xs text-zinc-300 leading-relaxed">
+                        {value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+
+              <Section title={t.sections.languages} icon={<Globe size={24} />}>
+                <div className="grid grid-cols-2 gap-4">
+                  {t.languages.map((lang: any, idx: number) => (
+                    <div key={idx} className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center">
+                      <div className="text-white font-black text-xs uppercase mb-1">{lang.name}</div>
+                      <div className="text-green-500 text-[10px] font-bold">{lang.level}</div>
+                    </div>
+                  ))}
                 </div>
               </Section>
 
@@ -338,7 +404,10 @@ export default function App() {
 
             {/* PRAWA KOLUMNA */}
             <div className="lg:col-span-8 p-6 md:p-20 relative z-10">
-              <Section title={t.sections.experience} icon={<Briefcase size={24} />}>
+              <Section 
+                title={t.sections.experience} 
+                icon={<Briefcase size={24} />}
+              >
                 {t.experience.map((exp: any, idx: number) => (
                   <ExperienceItem
                     key={idx}
@@ -346,16 +415,20 @@ export default function App() {
                     company={exp.company}
                     period={exp.period}
                     description={exp.description}
-                    skills={idx === 0 ? [
-                      "Kubernetes", "ArgoCD", "Ansible", "Helm", "Docker", "Linux", 
-                      "Windows", "Azure", "MySQL", "Nagios", "Zabbix", "Active Directory"
-                    ] : idx === 1 ? [
-                      "Active Directory", "Office 365", "WAN/LAN", "MySQL"
-                    ] : [
-                      "MS Windows", "LAN", "Hardware"
-                    ]}
+                    skills={exp.skills}
                   />
                 ))}
+              </Section>
+
+              <Section title={t.sections.certificates} icon={<Layers size={24} />}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {t.certificates.map((cert: string, idx: number) => (
+                    <div key={idx} className="flex items-center gap-4 p-4 rounded-xl bg-green-500/5 border border-green-500/20">
+                      <div className="text-green-400"><ExternalLink size={16} /></div>
+                      <span className="text-xs text-zinc-300 font-bold uppercase tracking-wider">{cert}</span>
+                    </div>
+                  ))}
+                </div>
               </Section>
 
               <Section title={t.sections.education} icon={<GraduationCap size={24} />}>
@@ -366,7 +439,7 @@ export default function App() {
                       <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight mb-2">
                         {edu.degree}
                       </h3>
-                      <div className="text-green-400 text-[9px] md:text-[10px] font-black uppercase tracking-widest bg-green-500/10 py-1 px-3 rounded-lg w-fit border border-green-500/20 mb-4 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                      <div className="text-green-400 text-[9px] md:text-[10px] font-black uppercase tracking-widest py-1 px-0 rounded-lg w-fit mb-4 transition-all group-hover:text-green-300">
                         {edu.school}{" "}
                         <span className="text-zinc-800 mx-2">//</span> {edu.period}
                       </div>
