@@ -206,6 +206,19 @@ export default function App() {
     handleLanguageSelect(newLang);
   };
 
+  const handleRevealContacts = () => {
+    if (!anyRevealed) {
+      setAnyRevealed(true);
+      // Wyślij zdarzenie do Google Analytics
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'reveal_contacts', {
+          event_category: 'engagement',
+          event_label: 'Contact Details Revealed'
+        });
+      }
+    }
+  };
+
   if (!lang) {
     return <LanguageSelector onSelect={handleLanguageSelect} />;
   }
