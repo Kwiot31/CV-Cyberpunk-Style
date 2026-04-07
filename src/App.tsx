@@ -324,8 +324,8 @@ export default function App() {
               <Section title={t.sections.skills} icon={<Layers size={24} />}>
                 <div className="space-y-4">
                   {Object.entries(t.skills).map(([key, value]: [string, any]) => (
-                    <div key={key} className="p-4 rounded-xl bg-green-500/[0.02] border border-green-500/10 hover:border-green-500/30 transition-colors">
-                      <p className="text-[10px] md:text-xs text-zinc-300 leading-relaxed">
+                    <div key={key} className="group p-4 rounded-xl bg-green-500/[0.02] border border-green-500/10 hover:bg-green-500 hover:border-green-500 transition-all duration-500 cursor-default">
+                      <p className="text-[10px] md:text-xs text-zinc-300 leading-relaxed group-hover:text-black font-medium">
                         {value}
                       </p>
                     </div>
@@ -336,9 +336,9 @@ export default function App() {
               <Section title={t.sections.languages} icon={<Globe size={24} />}>
                 <div className="grid grid-cols-2 gap-4">
                   {t.languages.map((lang: any, idx: number) => (
-                    <div key={idx} className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center">
-                      <div className="text-white font-black text-xs uppercase mb-1">{lang.name}</div>
-                      <div className="text-green-500 text-[10px] font-bold">{lang.level}</div>
+                    <div key={idx} className="group p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center hover:bg-green-500 hover:border-green-500 transition-all duration-500 cursor-default">
+                      <div className="text-white font-black text-xs uppercase mb-1 group-hover:text-black">{lang.name}</div>
+                      <div className="text-green-500 text-[10px] font-bold group-hover:text-black/70">{lang.level}</div>
                     </div>
                   ))}
                 </div>
