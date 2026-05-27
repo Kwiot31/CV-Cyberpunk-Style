@@ -7,6 +7,15 @@ interface FloatingLinesProps {
   maxSpeed?: number;
 }
 
+interface FloatingLine {
+  x: number;
+  y: number;
+  length: number;
+  speed: number;
+  angle: number;
+  opacity: number;
+}
+
 const FloatingLines: React.FC<FloatingLinesProps> = ({ 
   color = 'rgba(34, 197, 94, 0.3)', 
   count = 30, 
@@ -22,7 +31,7 @@ const FloatingLines: React.FC<FloatingLinesProps> = ({
     if (!ctx) return;
 
     let animationFrameId: number;
-    let lines: any[] = [];
+    let lines: FloatingLine[] = [];
 
     const resize = () => {
       canvas.width = window.innerWidth;

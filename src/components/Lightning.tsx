@@ -4,6 +4,18 @@ interface LightningProps {
   hue?: number;
 }
 
+interface Point {
+  x: number;
+  y: number;
+}
+
+interface Strike {
+  path: Point[];
+  alpha: number;
+  width: number;
+  branches: Point[][];
+}
+
 const Lightning: React.FC<LightningProps> = ({ hue = 287 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -14,7 +26,7 @@ const Lightning: React.FC<LightningProps> = ({ hue = 287 }) => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let strikes: any[] = [];
+    const strikes: Strike[] = [];
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -26,16 +38,14 @@ const Lightning: React.FC<LightningProps> = ({ hue = 287 }) => {
 
     // Funkcja generująca punkty pioruna (zygzak)
     const createLightningPath = (startX: number, startY: number, endX: number, endY: number, displacement: number) => {
-      let points = [{ x: startX, y: startY }];
-      let midX = (startX + endX) / 2;
-      let midY = (startY + endY) / 2;
+      const points: Point[] = [{ x: startX, y: startY }];
 
       // Rekurencyjne dzielenie linii na segmenty dla efektu zygzaka
       const subdivide = (x1: number, y1: number, x2: number, y2: number, disp: number) => {
         if (disp < 2) return;
         
-        let midX = (x1 + x2) / 2 + (Math.random() - 0.5) * disp;
-        let midY = (y1 + y2) / 2 + (Math.random() - 0.5) * disp;
+        const midX = (x1 + x2) / 2 + (Math.random() - 0.5) * disp;
+        const midY = (y1 + y2) / 2 + (Math.random() - 0.5) * disp;
         
         subdivide(x1, y1, midX, midY, disp / 2);
         points.push({ x: midX, y: midY });
@@ -73,24 +83,24 @@ const Lightning: React.FC<LightningProps> = ({ hue = 287 }) => {
       // Rysowanie aktywnych uderzeń
       strikes.forEach((strike, index) => {
         ctx.beginPath();
-        ctx.strokeStyle = `hsla(287, 100%, 80%, ${strike.alpha})`;
+        ctx.strokeStyle = `hsla(${hue}, 100%, 80%, ${strike.alpha})`;
         ctx.lineWidth = strike.width;
         ctx.lineJoin = 'round';
         ctx.shadowBlur = 35 * strike.alpha;
-        ctx.shadowColor = `hsla(287, 100%, 50%, 0.9)`;
+        ctx.shadowColor = `hsla(${hue}, 100%, 50%, 0.9)`;
 
         // Rysowanie głównej ścieżki
         ctx.moveTo(strike.path[0].x, strike.path[0].y);
-        strike.path.forEach((p: any) => ctx.lineTo(p.x, p.y));
+        strike.path.forEach((p) => ctx.lineTo(p.x, p.y));
         ctx.stroke();
 
         // Rysowanie odnóg (gałęzi)
-        strike.branches.forEach((b: any) => {
+        strike.branches.forEach((b) => {
           ctx.beginPath();
-          ctx.strokeStyle = `hsla(287, 100%, 70%, ${strike.alpha * 0.6})`;
+          ctx.strokeStyle = `hsla(${hue}, 100%, 70%, ${strike.alpha * 0.6})`;
           ctx.lineWidth = strike.width / 2;
           ctx.moveTo(b[0].x, b[0].y);
-          b.forEach((p: any) => ctx.lineTo(p.x, p.y));
+          b.forEach((p) => ctx.lineTo(p.x, p.y));
           ctx.stroke();
         });
 
@@ -99,7 +109,7 @@ const Lightning: React.FC<LightningProps> = ({ hue = 287 }) => {
         ctx.strokeStyle = `rgba(255, 255, 255, ${strike.alpha * 1.0})`;
         ctx.lineWidth = strike.width / 3;
         ctx.moveTo(strike.path[0].x, strike.path[0].y);
-        strike.path.forEach((p: any) => ctx.lineTo(p.x, p.y));
+        strike.path.forEach((p) => ctx.lineTo(p.x, p.y));
         ctx.stroke();
 
         // Powolne wygaszanie alfy dla efektu slow-motion

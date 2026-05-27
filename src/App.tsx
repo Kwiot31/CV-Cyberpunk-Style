@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Mail,
   Phone,
@@ -18,6 +18,11 @@ import {
 } from "lucide-react";
 import FloatingLines from "./components/FloatingLines";
 import { translations } from "./translations";
+
+type Translation = (typeof translations)["en"];
+type Experience = Translation["experience"][number];
+type Education = Translation["education"][number];
+type SpokenLanguage = Translation["languages"][number];
 
 // === KOMPONENTY WIZUALNE ===
 
@@ -67,7 +72,7 @@ const ExperienceItem = ({
   period,
   description,
   skills,
-}: any) => (
+}: Experience) => (
   <div className="relative pl-6 md:pl-10 pb-10 md:pb-12 border-l-2 border-white/5 last:pb-0 group">
     <div className="absolute left-[-11px] top-0 w-5 h-5 rounded-full bg-[#050505] border-2 border-green-500 group-hover:bg-green-500 transition-all duration-500 shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:shadow-[0_0_30px_rgba(34,197,94,0.8)]" />
     <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight mb-2 group-hover:text-green-300 transition-colors">
@@ -94,20 +99,43 @@ const ExperienceItem = ({
   </div>
 );
 
-const SocialIcon = ({ icon, href = "#" }: any) => (
+const SocialIcon = ({
+  icon,
+  href = "#",
+  isExternal = false,
+}: {
+  icon: React.ReactElement;
+  href?: string;
+  isExternal?: boolean;
+}) => (
   <a
     href={href}
+    target={isExternal ? "_blank" : undefined}
+    rel={isExternal ? "noopener noreferrer" : undefined}
+    aria-label="Social profile link"
     className="w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-white/[0.03] border border-white/10 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-green-600 hover:border-green-600 hover:scale-110 hover:-rotate-6 transition-all duration-500 shadow-2xl"
   >
     {React.cloneElement(icon, { size: 24 })}
   </a>
 );
 
-const RevealableContact = ({ icon, value, href, revealed, onReveal }: any) => {
+const RevealableContact = ({
+  icon,
+  value,
+  href,
+  revealed,
+  onReveal,
+}: {
+  icon: React.ReactElement;
+  value: string;
+  href?: string;
+  revealed: boolean;
+  onReveal: () => void;
+}) => {
   const mask = (val: string) => val.replace(/[^\s]/g, "•");
 
   const handleReveal = () => {
-    if (onReveal) onReveal();
+    onReveal();
   };
 
   const content = (
@@ -186,15 +214,11 @@ const LanguageSelector = ({ onSelect }: { onSelect: (lang: "pl" | "en") => void 
 // === GŁÓWNA STRONA ===
 
 export default function App() {
-  const [lang, setLang] = useState<"pl" | "en" | null>(null);
+  const [lang, setLang] = useState<"pl" | "en" | null>(() => {
+    const savedLang = localStorage.getItem("preferredLanguage");
+    return savedLang === "pl" || savedLang === "en" ? savedLang : null;
+  });
   const [anyRevealed, setAnyRevealed] = useState(false);
-
-  useEffect(() => {
-    const savedLang = localStorage.getItem("preferredLanguage") as "pl" | "en";
-    if (savedLang) {
-      setLang(savedLang);
-    }
-  }, []);
 
   const handleLanguageSelect = (selectedLang: "pl" | "en") => {
     setLang(selectedLang);
@@ -210,10 +234,10 @@ export default function App() {
     if (!anyRevealed) {
       setAnyRevealed(true);
       // Wyślij zdarzenie do Google Analytics
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'reveal_contacts', {
-          event_category: 'engagement',
-          event_label: 'Contact Details Revealed'
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "reveal_contacts", {
+          event_category: "engagement",
+          event_label: "Contact Details Revealed",
         });
       }
     }
@@ -285,24 +309,24 @@ export default function App() {
                   value="kubakwiat31@gmail.com" 
                   href="mailto:kubakwiat31@gmail.com" 
                   revealed={anyRevealed}
-                  onReveal={() => setAnyRevealed(true)}
+                  onReveal={handleRevealContacts}
                 />
                 <RevealableContact 
                   icon={<Phone />} 
                   value="+48 575 418 810" 
                   href="tel:+48575418810" 
                   revealed={anyRevealed}
-                  onReveal={() => setAnyRevealed(true)}
+                  onReveal={handleRevealContacts}
                 />
                 <RevealableContact 
                   icon={<MapPin />} 
                   value={t.location} 
                   revealed={anyRevealed}
-                  onReveal={() => setAnyRevealed(true)}
+                  onReveal={handleRevealContacts}
                 />
                 {!anyRevealed && (
                   <button 
-                    onClick={() => setAnyRevealed(true)}
+                    onClick={handleRevealContacts}
                     className="text-[7px] md:text-[8px] text-green-500 animate-pulse tracking-[0.3em] font-black px-2 py-1 border border-green-500/50 rounded-md hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-300"
                   >
                     [ CLICK TO DECRYPT ]
@@ -315,6 +339,7 @@ export default function App() {
               <SocialIcon
                 icon={<Linkedin />}
                 href="https://www.linkedin.com/in/jakub-kwiatkowski-73200b23b/"
+                isExternal
               />
             </div>
           </div>
@@ -336,7 +361,7 @@ export default function App() {
 
               <Section title={t.sections.skills} icon={<Layers size={24} />}>
                 <div className="space-y-4">
-                  {Object.entries(t.skills).map(([key, value]: [string, any]) => (
+                  {Object.entries(t.skills).map(([key, value]) => (
                     <div key={key} className="group p-4 rounded-xl bg-green-500/[0.02] border border-green-500/10 hover:bg-green-500 hover:border-green-500 transition-all duration-500 cursor-default">
                       <p className="text-[10px] md:text-xs text-zinc-300 leading-relaxed group-hover:text-black font-medium">
                         {value}
@@ -348,7 +373,7 @@ export default function App() {
 
               <Section title={t.sections.languages} icon={<Globe size={24} />}>
                 <div className="grid grid-cols-2 gap-4">
-                  {t.languages.map((lang: any, idx: number) => (
+                  {t.languages.map((lang: SpokenLanguage, idx: number) => (
                     <div key={idx} className="group p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center hover:bg-green-500 hover:border-green-500 transition-all duration-500 cursor-default">
                       <div className="text-white font-black text-xs uppercase mb-1 group-hover:text-black">{lang.name}</div>
                       <div className="text-green-500 text-[10px] font-bold group-hover:text-black/70">{lang.level}</div>
@@ -421,7 +446,7 @@ export default function App() {
                 title={t.sections.experience} 
                 icon={<Briefcase size={24} />}
               >
-                {t.experience.map((exp: any, idx: number) => (
+                {t.experience.map((exp: Experience, idx: number) => (
                   <ExperienceItem
                     key={idx}
                     role={exp.role}
@@ -446,7 +471,7 @@ export default function App() {
 
               <Section title={t.sections.education} icon={<GraduationCap size={24} />}>
                 <div className="space-y-10">
-                  {t.education.map((edu: any, idx: number) => (
+                  {t.education.map((edu: Education, idx: number) => (
                     <div key={idx} className="group relative pl-6 md:pl-10 border-l-2 border-white/5">
                       <div className="absolute left-[-11px] top-0 w-5 h-5 rounded-full bg-[#050505] border-2 border-green-500 group-hover:bg-green-500 transition-all shadow-[0_0_20px_rgba(34,197,94,0.4)]" />
                       <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight mb-2">
