@@ -72,4 +72,14 @@ Results:
 ## Residual Risks / Notes
 
 - Coverage is now present but still limited by a small test suite; this is expected for current project size and should be expanded if behavior grows.
-- Vite emits deprecation warnings tied to internal plugin options in this environment, but build/test functionality remains green.
+- Migration to latest stack was completed in this branch:
+  - React/ReactDOM -> 19.x
+  - Vite -> 8.x
+  - Tailwind CSS -> 4.x (with `@tailwindcss/vite` and `@tailwindcss/postcss`)
+- Added Node baseline in `package.json`:
+  - `"engines": { "node": ">=22.12.0" }`
+- Post-upgrade verification remains green:
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm run test:run`
+  - `npm run build`

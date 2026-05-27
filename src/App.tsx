@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Mail,
   Phone,
-  Linkedin,
   MapPin,
   Briefcase,
   GraduationCap,
@@ -49,14 +48,14 @@ const Section = ({
   headerClassName = "",
 }: {
   title: string;
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ size?: number; className?: string }>;
   children: React.ReactNode;
   headerClassName?: string;
 }) => (
   <section className="mb-10 md:mb-14 relative">
     <div className={`relative z-10 flex items-center gap-3 md:gap-5 mb-6 md:mb-8 ${headerClassName}`}>
       <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-green-500/20 flex items-center justify-center text-green-400 border border-green-500/40 shadow-[0_0_25px_rgba(34,197,94,0.2)]">
-        {React.cloneElement(icon as React.ReactElement, { size: 20 })}
+        {React.cloneElement(icon, { size: 20 })}
       </div>
       <h2 className="text-lg md:text-2xl font-black tracking-[0.15em] md:tracking-[0.25em] text-white uppercase border-b-2 border-green-500/30 pb-2 flex-1 shadow-[0_4px_10px_-5px_rgba(34,197,94,0.3)]">
         {title}
@@ -104,7 +103,7 @@ const SocialIcon = ({
   href = "#",
   isExternal = false,
 }: {
-  icon: React.ReactElement;
+  icon: React.ReactElement<{ size?: number; className?: string }>;
   href?: string;
   isExternal?: boolean;
 }) => (
@@ -126,7 +125,7 @@ const RevealableContact = ({
   revealed,
   onReveal,
 }: {
-  icon: React.ReactElement;
+  icon: React.ReactElement<{ size?: number; className?: string }>;
   value: string;
   href?: string;
   revealed: boolean;
@@ -337,7 +336,7 @@ export default function App() {
 
             <div className="flex flex-row lg:flex-col gap-4 md:gap-6 relative z-10">
               <SocialIcon
-                icon={<Linkedin />}
+                icon={<ExternalLink />}
                 href="https://www.linkedin.com/in/jakub-kwiatkowski-73200b23b/"
                 isExternal
               />
