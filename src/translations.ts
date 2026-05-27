@@ -16,8 +16,8 @@ export const translations = {
       languages: "Języki"
     },
     about: {
-      quote: "Specjalista IT z ponad 3-letnim doświadczeniem w wsparciu aplikacji krytycznych i administracji systemami.",
-      text: "Łączę wiedzę z zakresu Linux/Windows, baz danych (SQL, Oracle) oraz monitoringu z praktyczną znajomością ekosystemu Kubernetes i ArgoCD. Dążę do rozwoju w kierunku Administracji Systemami i automatyzacji procesów IT. \n\nPosiadam solidne podstawy z informatyki oraz ukończyłem studia na kierunkach Zarządzanie i Inżynieria Produkcji oraz Towaroznawstwo. Nauczyło mnie to systemowego podejścia do jakości i efektywności. Łączę wiedzę techniczną z praktycznym podejściem, skutecznie wspierając rozwój projektów IT."
+      quote: "Specjalista IT z ponad 3-letnim doświadczeniem we wsparciu aplikacji krytycznych i administracji systemami.",
+      text: "Łączę wiedzę z zakresu Linux/Windows, baz danych (SQL, Oracle) oraz monitoringu z praktyczną znajomością ekosystemu Kubernetes i ArgoCD. Dążę do rozwoju w kierunku administracji systemami i automatyzacji procesów IT. \n\nPosiadam solidne podstawy informatyczne oraz ukończyłem studia na kierunkach Zarządzanie i Inżynieria Produkcji oraz Towaroznawstwo. Nauczyło mnie to systemowego podejścia do jakości i efektywności. Łączę wiedzę techniczną z praktycznym podejściem, skutecznie wspierając rozwój projektów IT."
     },
     interests: {
       gym: { title: "Sport i Siłownia", desc: "Regularne treningi siłowe" },
@@ -51,13 +51,13 @@ export const translations = {
     education: [
       {
         degree: "Towaroznawstwo (Magister)",
-        school: "Uniwersystet Ekonomiczny w Poznaniu",
+        school: "Uniwersytet Ekonomiczny w Poznaniu",
         period: "2020 - 2022",
         description: "Studia magisterskie w Instytucie nauk o jakości. Skuteczne działanie w obszarze kontroli jakości i zarządzania produktami."
       },
       {
         degree: "Zarządzanie i inżynieria produkcji (Inżynier)",
-        school: "Uniwersystet Ekonomiczny w Poznaniu",
+        school: "Uniwersytet Ekonomiczny w Poznaniu",
         period: "2017 - 2020",
         description: "Studia inżynierskie. Podejście procesowe, analityczne myślenie oraz wykorzystywanie metod usprawniania i optymalizacji."
       },
@@ -79,7 +79,7 @@ export const translations = {
     certificates: [
       "ISTQB Certified Tester - poziom podstawowy",
       "Kurs audytora wewnętrznego ISO 9001",
-      "ISO 27001 Cybersecurity manage"
+      "ISO 27001 Cybersecurity Management"
     ],
     languages: [
       { name: "Angielski", level: "B2" },
@@ -167,7 +167,7 @@ export const translations = {
     certificates: [
       "ISTQB Certified Tester - Foundation Level",
       "ISO 9001 Internal Auditor Course",
-      "ISO 27001 Cybersecurity manage"
+      "ISO 27001 Cybersecurity Management"
     ],
     languages: [
       { name: "English", level: "B2" },
