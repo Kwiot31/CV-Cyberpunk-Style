@@ -7,6 +7,14 @@ interface FloatingLinesProps {
   maxSpeed?: number;
 }
 
+function withAlpha(color: string, alpha: number): string {
+  const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (match) {
+    return `rgba(${match[1]}, ${match[2]}, ${match[3]}, ${alpha})`;
+  }
+  return color;
+}
+
 const FloatingLines: React.FC<FloatingLinesProps> = ({ 
   color = 'rgba(34, 197, 94, 0.3)', 
   count = 30, 
@@ -52,7 +60,7 @@ const FloatingLines: React.FC<FloatingLinesProps> = ({
 
       lines.forEach(line => {
         ctx.beginPath();
-        ctx.strokeStyle = color.replace('0.3', line.opacity.toString());
+        ctx.strokeStyle = withAlpha(color, line.opacity);
         ctx.lineWidth = 2; // Nieco cieńsze dla wydajności
         ctx.lineCap = 'round';
         

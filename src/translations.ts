@@ -13,7 +13,8 @@ export const translations = {
       education: "Edukacja",
       skills: "Umiejętności Techniczne",
       certificates: "Certyfikaty",
-      languages: "Języki"
+      languages: "Języki",
+      projects: "Projekty"
     },
     about: {
       quote: "Specjalista IT z ponad 3-letnim doświadczeniem w wsparciu aplikacji krytycznych i administracji systemami.",
@@ -81,6 +82,15 @@ export const translations = {
       "Kurs audytora wewnętrznego ISO 9001",
       "ISO 27001 Cybersecurity manage"
     ],
+    projects: [
+      {
+        name: "EdgePremium.pro",
+        url: "https://edgepremium.pro",
+        period: "Projekt hobbystyczny",
+        description: "Tworzę w wolnym czasie nowoczesne strony i aplikacje webowe (SaaS) z naciskiem na wydajność, Edge Computing i architekturę Next.js/React.",
+        skills: ["Next.js", "React", "TypeScript", "Cloudflare", "Tailwind"]
+      }
+    ],
     languages: [
       { name: "Angielski", level: "B2" },
       { name: "Rosyjski", level: "A2" }
@@ -101,7 +111,8 @@ export const translations = {
       education: "Education",
       skills: "Technical Skills",
       certificates: "Certificates",
-      languages: "Languages"
+      languages: "Languages",
+      projects: "Projects"
     },
     about: {
       quote: "IT Specialist with over 3 years of experience in critical application support and system administration.",
@@ -168,6 +179,15 @@ export const translations = {
       "ISTQB Certified Tester - Foundation Level",
       "ISO 9001 Internal Auditor Course",
       "ISO 27001 Cybersecurity manage"
+    ],
+    projects: [
+      {
+        name: "EdgePremium.pro",
+        url: "https://edgepremium.pro",
+        period: "Side project",
+        description: "I build modern websites and web apps (SaaS) in my free time, focused on performance, edge computing, and Next.js/React architecture.",
+        skills: ["Next.js", "React", "TypeScript", "Cloudflare", "Tailwind"]
+      }
     ],
     languages: [
       { name: "English", level: "B2" },

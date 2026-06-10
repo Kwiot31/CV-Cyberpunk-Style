@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Mail,
-  Phone,
   Linkedin,
   MapPin,
   Briefcase,
@@ -61,13 +59,21 @@ const Section = ({
   </section>
 );
 
+interface ExperienceItemProps {
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  skills?: string[];
+}
+
 const ExperienceItem = ({
   role,
   company,
   period,
   description,
   skills,
-}: any) => (
+}: ExperienceItemProps) => (
   <div className="relative pl-6 md:pl-10 pb-10 md:pb-12 border-l-2 border-white/5 last:pb-0 group">
     <div className="absolute left-[-11px] top-0 w-5 h-5 rounded-full bg-[#050505] border-2 border-green-500 group-hover:bg-green-500 transition-all duration-500 shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:shadow-[0_0_30px_rgba(34,197,94,0.8)]" />
     <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight mb-2 group-hover:text-green-300 transition-colors">
@@ -102,44 +108,6 @@ const SocialIcon = ({ icon, href = "#" }: any) => (
     {React.cloneElement(icon, { size: 24 })}
   </a>
 );
-
-const RevealableContact = ({ icon, value, href, revealed, onReveal }: any) => {
-  const mask = (val: string) => val.replace(/[^\s]/g, "•");
-
-  const handleReveal = () => {
-    if (onReveal) onReveal();
-  };
-
-  const content = (
-    <div className="flex items-center gap-2 md:gap-3">
-      {React.cloneElement(icon, { size: 14, className: "text-green-500 md:w-4 md:h-4" })}
-      <span className={`transition-all duration-500 ${revealed ? "text-white" : "text-zinc-600 font-mono tracking-widest"}`}>
-        {revealed ? value : mask(value)}
-      </span>
-    </div>
-  );
-
-  if (!revealed) {
-    return (
-      <button 
-        onClick={handleReveal}
-        className="group flex items-center gap-2 hover:opacity-100 transition-opacity"
-      >
-        {content}
-      </button>
-    );
-  }
-
-  if (href) {
-    return (
-      <a href={href} className="hover:text-green-400 transition-all text-white animate-in fade-in duration-500">
-        {content}
-      </a>
-    );
-  }
-
-  return <div className="text-zinc-400 animate-in fade-in duration-500">{content}</div>;
-};
 
 const LanguageSelector = ({ onSelect }: { onSelect: (lang: "pl" | "en") => void }) => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#010101] overflow-hidden">
@@ -187,7 +155,6 @@ const LanguageSelector = ({ onSelect }: { onSelect: (lang: "pl" | "en") => void 
 
 export default function App() {
   const [lang, setLang] = useState<"pl" | "en" | null>(null);
-  const [anyRevealed, setAnyRevealed] = useState(false);
 
   useEffect(() => {
     const savedLang = localStorage.getItem("preferredLanguage") as "pl" | "en";
@@ -204,19 +171,6 @@ export default function App() {
   const toggleLanguage = () => {
     const newLang = lang === "pl" ? "en" : "pl";
     handleLanguageSelect(newLang);
-  };
-
-  const handleRevealContacts = () => {
-    if (!anyRevealed) {
-      setAnyRevealed(true);
-      // Wyślij zdarzenie do Google Analytics
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'reveal_contacts', {
-          event_category: 'engagement',
-          event_label: 'Contact Details Revealed'
-        });
-      }
-    }
   };
 
   if (!lang) {
@@ -280,34 +234,10 @@ export default function App() {
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 md:gap-10 text-[9px] md:text-[11px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase opacity-80">
-                <RevealableContact 
-                  icon={<Mail />} 
-                  value="kubakwiat31@gmail.com" 
-                  href="mailto:kubakwiat31@gmail.com" 
-                  revealed={anyRevealed}
-                  onReveal={() => setAnyRevealed(true)}
-                />
-                <RevealableContact 
-                  icon={<Phone />} 
-                  value="+48 575 418 810" 
-                  href="tel:+48575418810" 
-                  revealed={anyRevealed}
-                  onReveal={() => setAnyRevealed(true)}
-                />
-                <RevealableContact 
-                  icon={<MapPin />} 
-                  value={t.location} 
-                  revealed={anyRevealed}
-                  onReveal={() => setAnyRevealed(true)}
-                />
-                {!anyRevealed && (
-                  <button 
-                    onClick={() => setAnyRevealed(true)}
-                    className="text-[7px] md:text-[8px] text-green-500 animate-pulse tracking-[0.3em] font-black px-2 py-1 border border-green-500/50 rounded-md hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-300"
-                  >
-                    [ CLICK TO DECRYPT ]
-                  </button>
-                )}
+                <div className="flex items-center gap-2 md:gap-3 text-white">
+                  <MapPin size={14} className="text-green-500 md:w-4 md:h-4" />
+                  <span>{t.location}</span>
+                </div>
               </div>
             </div>
 
@@ -431,6 +361,43 @@ export default function App() {
                     skills={exp.skills}
                   />
                 ))}
+              </Section>
+
+              <Section title={t.sections.projects} icon={<Code2 size={24} />}>
+                <div className="space-y-4">
+                  {t.projects.map((project, idx) => (
+                    <a
+                      key={idx}
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-5 md:p-6 rounded-xl bg-green-500/5 border border-green-500/20 hover:bg-green-500/10 hover:border-green-500/40 transition-all duration-500 group"
+                    >
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <h3 className="text-lg font-bold text-white uppercase tracking-tight group-hover:text-green-300 transition-colors">
+                          {project.name}
+                        </h3>
+                        <ExternalLink size={16} className="text-green-400 shrink-0 mt-1" />
+                      </div>
+                      <p className="text-green-400 text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-4">
+                        {project.period}
+                      </p>
+                      <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-medium mb-4 group-hover:text-zinc-200 transition-colors">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2 py-1 text-[8px] md:text-[9px] font-black uppercase tracking-tighter bg-green-500/5 border border-green-500/20 rounded text-green-500/60"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </Section>
 
               <Section title={t.sections.certificates} icon={<Layers size={24} />}>
