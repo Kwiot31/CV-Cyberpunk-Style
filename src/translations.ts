@@ -3,8 +3,8 @@ export const translations = {
     status: "Gotowy do pracy",
     name: "JAKUB",
     surname: "KWIATKOWSKI",
-    role: "IT Support",
-    roleAccent: "& Admin IT",
+    role: "Admin IT",
+    roleAccent: "& IT Support",
     location: "Polska - Poznań",
     sections: {
       about: "Profil",
@@ -87,8 +87,7 @@ export const translations = {
         name: "EdgePremium.pro",
         url: "https://edgepremium.pro",
         period: "Projekt hobbystyczny",
-        description: "Tworzę w wolnym czasie nowoczesne strony i aplikacje webowe (SaaS) z naciskiem na wydajność, Edge Computing i architekturę Next.js/React.",
-        skills: ["Next.js", "React", "TypeScript", "Cloudflare", "Tailwind"]
+        description: "Projekt hobbystyczny — nowoczesne strony i aplikacje webowe. AI wspiera pracę nad frontendem.\nOdpowiadam za logikę, architekturę, deployment, infrastrukturę, bezpieczeństwo i testy — stack dobierany do potrzeb klienta."
       }
     ],
     languages: [
@@ -101,8 +100,8 @@ export const translations = {
     status: "Ready for work",
     name: "JAKUB",
     surname: "KWIATKOWSKI",
-    role: "IT Support",
-    roleAccent: "& IT Admin",
+    role: "IT Admin",
+    roleAccent: "& IT Support",
     location: "Poland - Poznan",
     sections: {
       about: "Profile",
@@ -185,8 +184,7 @@ export const translations = {
         name: "EdgePremium.pro",
         url: "https://edgepremium.pro",
         period: "Side project",
-        description: "I build modern websites and web apps (SaaS) in my free time, focused on performance, edge computing, and Next.js/React architecture.",
-        skills: ["Next.js", "React", "TypeScript", "Cloudflare", "Tailwind"]
+        description: "Personal project building modern websites and web apps. AI supports frontend work.\nI handle logic, architecture, deployment, infrastructure, security, and testing — stack tailored to each client."
       }
     ],
     languages: [

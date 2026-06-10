@@ -226,11 +226,9 @@ export default function App() {
                   {t.surname}
                 </span>
               </h1>
-              <p className="text-lg sm:text-2xl md:text-3xl text-zinc-400 font-extralight tracking-[0.2em] sm:tracking-[0.5em] uppercase mb-10 md:mb-14">
-                {t.role}{" "}
-                <span className="text-green-400 font-black underline decoration-green-500 decoration-4 sm:decoration-8 underline-offset-[8px] sm:underline-offset-[12px] shadow-green-500/20 shadow-sm">
-                  {t.roleAccent}
-                </span>
+              <p className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 pb-3 md:pb-4 mb-10 md:mb-14 border-b border-green-500/25 shadow-[0_1px_0_0_rgba(34,197,94,0.12)] text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-[0.06em] text-white">
+                <span className="text-green-400">{t.role}</span>
+                <span>{t.roleAccent}</span>
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 md:gap-10 text-[9px] md:text-[11px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase opacity-80">
@@ -382,19 +380,9 @@ export default function App() {
                       <p className="text-green-400 text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-4">
                         {project.period}
                       </p>
-                      <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-medium mb-4 group-hover:text-zinc-200 transition-colors">
+                      <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-medium whitespace-pre-line group-hover:text-zinc-200 transition-colors">
                         {project.description}
                       </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-2 py-1 text-[8px] md:text-[9px] font-black uppercase tracking-tighter bg-green-500/5 border border-green-500/20 rounded text-green-500/60"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
                     </a>
                   ))}
                 </div>
