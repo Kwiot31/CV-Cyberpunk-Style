@@ -1,37 +1,55 @@
-# CV — Cyberpunk Style
+# ⚡ CYBERPUNK-STYLE CV ⚡
 
-Interactive bilingual CV (PL/EN) with a green neon cyberpunk aesthetic.
+<p align="center">
+  <img src="https://img.shields.io/badge/VITE-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/REACT-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/TYPESCRIPT-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/TAILWIND-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+</p>
 
-**Live:** [kwiatu-dev.pl](https://kwiatu-dev.pl)
+---
 
-## Stack
+## 🚀 OVERVIEW
+Modern, interactive, and fully responsive CV template inspired by **Cyberpunk 2077 aesthetic**. High contrast, glassmorphism, and neon animations.
 
-- React 18 + TypeScript
-- Vite
-- Tailwind CSS
+> "The future is now, old man." — Anonymous Netrunner
 
-## Features
+### ✨ FEATURES
+- 🎴 **Glassmorphism UI** – Sleek, semi-transparent containers.
+- 🌈 **Neon Accents** – Dynamic borders and glow effects.
+- 📱 **Fully Responsive** – Optimized for Neural Links and ancient Smartphones.
+- 🌐 **Multi-language** – Built-in translation support.
+- ⚡ **Lightning Fast** – Powered by Vite & optimized assets.
 
-- Bilingual UI (Polish / English) with language picker
-- Sections: profile, tech stack, career, education, side projects (EdgePremium.pro)
-- Canvas background animation (`FloatingLines`) with reduced-motion support
-- Responsive layout for mobile and desktop
-- Production build output in `dist/`
+---
 
-## Scripts
+## 🛠 TECH STACK
+- **Frontend:** React 18
+- **Styling:** Tailwind CSS + Lucide Icons
+- **Type Safety:** TypeScript
+- **Build Tool:** Vite
 
+---
+
+## ⚡ QUICK START
 ```bash
+# Clone the repository
+git clone https://github.com/Kwiot31/CV-Cyberpunk-Style.git
+
+# Install dependencies
 npm install
-npm run dev      # local dev server
-npm run build    # typecheck + production build → dist/
-npm run preview  # preview production build
-npm run lint     # ESLint
+
+# Launch the Matrix (Dev Server)
+npm run dev
 ```
 
-## Deploy
+---
 
-Build the project and upload the contents of `dist/` to your static host (e.g. GitHub Pages, Cloudflare Pages, nginx).
+## 📸 PREVIEW
+*(Add your screenshot here after hosting)*
 
-```bash
-npm run build
-```
+---
+
+<p align="center">
+  Built with 🦾 by <b>Kwiot31</b>
+</p>
