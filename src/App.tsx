@@ -47,14 +47,14 @@ const Section = ({
   headerClassName?: string;
 }) => (
   <section className="mb-10 md:mb-14 relative">
-    <div className={`relative z-10 flex items-center gap-3 md:gap-5 mb-6 md:mb-8 ${headerClassName}`}>
-      <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-green-500/20 flex items-center justify-center text-green-400 border border-green-500/40 shadow-[0_0_25px_rgba(34,197,94,0.2)]">
-        {React.cloneElement(icon as React.ReactElement, { size: 20 })}
-      </div>
-      <h2 className="text-lg md:text-2xl font-black tracking-[0.15em] md:tracking-[0.25em] text-white uppercase border-b-2 border-green-500/30 pb-2 flex-1 shadow-[0_4px_10px_-5px_rgba(34,197,94,0.3)]">
-        {title}
-      </h2>
-    </div>
+    <h2
+      className={`flex items-center gap-3 md:gap-4 pb-3 md:pb-4 mb-6 md:mb-8 border-b border-green-500/25 shadow-[0_1px_0_0_rgba(34,197,94,0.12)] text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-[0.06em] text-white ${headerClassName}`}
+    >
+      <span className="text-green-400 shrink-0">
+        {React.cloneElement(icon as React.ReactElement, { size: 22, strokeWidth: 2 })}
+      </span>
+      {title}
+    </h2>
     <div className="space-y-6 relative z-10">{children}</div>
   </section>
 );

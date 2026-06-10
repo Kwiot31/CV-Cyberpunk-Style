@@ -7,14 +7,14 @@ export const translations = {
     roleAccent: "& Admin IT",
     location: "Polska - Poznań",
     sections: {
-      about: "O Mnie",
-      interests: "Zainteresowania",
-      experience: "Doświadczenie",
+      about: "Profil",
+      interests: "Poza Pracą",
+      experience: "Kariera",
       education: "Edukacja",
-      skills: "Umiejętności Techniczne",
+      skills: "Tech Stack",
       certificates: "Certyfikaty",
       languages: "Języki",
-      projects: "Projekty"
+      projects: "Własne Projekty"
     },
     about: {
       quote: "Specjalista IT z ponad 3-letnim doświadczeniem w wsparciu aplikacji krytycznych i administracji systemami.",
@@ -105,14 +105,14 @@ export const translations = {
     roleAccent: "& IT Admin",
     location: "Poland - Poznan",
     sections: {
-      about: "About Me",
-      interests: "Interests",
-      experience: "Experience",
+      about: "Profile",
+      interests: "Off the Clock",
+      experience: "Career",
       education: "Education",
-      skills: "Technical Skills",
-      certificates: "Certificates",
+      skills: "Tech Stack",
+      certificates: "Credentials",
       languages: "Languages",
-      projects: "Projects"
+      projects: "Side Projects"
     },
     about: {
       quote: "IT Specialist with over 3 years of experience in critical application support and system administration.",
