@@ -1,4 +1,6 @@
-export const translations = {
+import type { Translations } from "./types";
+
+export const translations: Translations = {
   pl: {
     status: "Gotowy do pracy",
     name: "JAKUB",
@@ -21,10 +23,9 @@ export const translations = {
       text: "Łączę wiedzę z zakresu Linux/Windows, baz danych (SQL, Oracle) oraz monitoringu z praktyczną znajomością ekosystemu Kubernetes i ArgoCD. Dążę do rozwoju w kierunku Administracji Systemami i automatyzacji procesów IT. \n\nPosiadam solidne podstawy z informatyki oraz ukończyłem studia na kierunkach Zarządzanie i Inżynieria Produkcji oraz Towaroznawstwo. Nauczyło mnie to systemowego podejścia do jakości i efektywności. Łączę wiedzę techniczną z praktycznym podejściem, skutecznie wspierając rozwój projektów IT."
     },
     interests: {
-      gym: { title: "Sport i Siłownia", desc: "Regularne treningi siłowe" },
-      bike: { title: "Motoryzacja", desc: "Pasja do techniki i designu" },
-      walking: { title: "Spacery", desc: "Źródło pozytywnej energii" },
-      tech: { title: "Nowe technologie", desc: "Śledzenie trendów IT i AI" }
+      tech: { title: "AI i Technologie", desc: "Pasja do AI, nowych technologii i newsów tech" },
+      active: { title: "Aktywność", desc: "Siłownia, jazda na rowerze i długie spacery" },
+      lifestyle: { title: "Zdrowy Styl Życia", desc: "Zdrowe jedzenie i dbanie o dobre nawyki" }
     },
     experience: [
       {
@@ -87,14 +88,19 @@ export const translations = {
         name: "EdgePremium.pro",
         url: "https://edgepremium.pro",
         period: "Projekt hobbystyczny",
-        description: "Projekt hobbystyczny — nowoczesne strony i aplikacje webowe. AI wspiera pracę nad frontendem.\nOdpowiadam za logikę, architekturę, deployment, infrastrukturę, bezpieczeństwo i testy — stack dobierany do potrzeb klienta."
+        description: "Projekt hobbystyczny. Nowoczesne strony i aplikacje webowe. AI wspiera pracę nad frontendem.\nOdpowiadam za logikę, architekturę, deployment, infrastrukturę, bezpieczeństwo i testy. Stack dobierany do potrzeb klienta."
       }
     ],
     languages: [
       { name: "Angielski", level: "B2" },
       { name: "Rosyjski", level: "A2" }
     ],
-    footer: "Portfolio"
+    footer: "Portfolio",
+    security: "Strona zabezpieczona przez Cloudflare",
+    ui: {
+      readMore: "Czytaj więcej",
+      readLess: "Zwiń"
+    }
   },
   en: {
     status: "Ready for work",
@@ -118,10 +124,9 @@ export const translations = {
       text: "I combine knowledge in Linux/Windows, databases (SQL, Oracle), and monitoring with practical experience in the Kubernetes and ArgoCD ecosystem. I aim to develop towards System Administration and IT process automation. \n\nI have a solid foundation in computer science and graduated in Management and Production Engineering as well as Commodity Science. This taught me a systemic approach to quality and efficiency. I combine technical knowledge with a practical approach, effectively supporting the development of IT projects."
     },
     interests: {
-      gym: { title: "Sport & Gym", desc: "Regular strength training" },
-      bike: { title: "Automotive", desc: "Passion for technology and design" },
-      walking: { title: "Walking", desc: "Source of positive energy" },
-      tech: { title: "New Technologies", desc: "Tracking IT and AI trends" }
+      tech: { title: "AI & Tech", desc: "Passion for AI, new technology, and tech news" },
+      active: { title: "Stay Active", desc: "Gym, cycling, and long walks" },
+      lifestyle: { title: "Healthy Lifestyle", desc: "Healthy food and good daily habits" }
     },
     experience: [
       {
@@ -184,13 +189,18 @@ export const translations = {
         name: "EdgePremium.pro",
         url: "https://edgepremium.pro",
         period: "Side project",
-        description: "Personal project building modern websites and web apps. AI supports frontend work.\nI handle logic, architecture, deployment, infrastructure, security, and testing — stack tailored to each client."
+        description: "Personal project building modern websites and web apps. AI supports frontend work.\nI handle logic, architecture, deployment, infrastructure, security, and testing. Stack tailored to each client."
       }
     ],
     languages: [
       { name: "English", level: "B2" },
       { name: "Russian", level: "A2" }
     ],
-    footer: "Portfolio"
+    footer: "Portfolio",
+    security: "Website secured by Cloudflare",
+    ui: {
+      readMore: "Read more",
+      readLess: "Show less"
+    }
   }
 };

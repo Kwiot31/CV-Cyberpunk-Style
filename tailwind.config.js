@@ -7,13 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        primary: "#a855f7", // Fioletowy pasujący do Lightning
+        background: "#010101",
+        primary: "#22c55e",
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      }
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [require("tailwindcss-animate")],
+};

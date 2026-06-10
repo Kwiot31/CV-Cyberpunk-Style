@@ -1,10 +1,19 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
 interface FloatingLinesProps {
   color?: string;
   count?: number;
   minSpeed?: number;
   maxSpeed?: number;
+}
+
+interface Line {
+  x: number;
+  y: number;
+  length: number;
+  speed: number;
+  angle: number;
+  opacity: number;
 }
 
 function withAlpha(color: string, alpha: number): string {
@@ -15,68 +24,66 @@ function withAlpha(color: string, alpha: number): string {
   return color;
 }
 
-const FloatingLines: React.FC<FloatingLinesProps> = ({ 
-  color = 'rgba(34, 197, 94, 0.3)', 
-  count = 30, 
-  minSpeed = 0.5, 
-  maxSpeed = 1.5 
+const FloatingLines: React.FC<FloatingLinesProps> = ({
+  color = "rgba(34, 197, 94, 0.3)",
+  count = 30,
+  minSpeed = 0.5,
+  maxSpeed = 1.5,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
-    let lines: any[] = [];
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionQuery.matches) return;
+
+    let animationFrameId = 0;
+    let lines: Line[] = [];
+    let isVisible = document.visibilityState === "visible";
+    const lineCount = window.innerWidth < 768 ? Math.min(count, 12) : count;
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      initLines();
+      lines = Array.from({ length: lineCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        length: Math.random() * 200 + 100,
+        speed: Math.random() * (maxSpeed - minSpeed) + minSpeed,
+        angle: Math.random() * Math.PI * 2,
+        opacity: Math.random() * 0.5 + 0.1,
+      }));
     };
-
-    const initLines = () => {
-      lines = [];
-      for (let i = 0; i < count; i++) {
-        lines.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          length: Math.random() * 200 + 100,
-          speed: Math.random() * (maxSpeed - minSpeed) + minSpeed,
-          angle: Math.random() * Math.PI * 2,
-          opacity: Math.random() * 0.5 + 0.1
-        });
-      }
-    };
-
-    window.addEventListener('resize', resize);
-    resize();
 
     const draw = () => {
+      if (!isVisible) {
+        animationFrameId = requestAnimationFrame(draw);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      lines.forEach(line => {
+      lines.forEach((line) => {
         ctx.beginPath();
         ctx.strokeStyle = withAlpha(color, line.opacity);
-        ctx.lineWidth = 2; // Nieco cieńsze dla wydajności
-        ctx.lineCap = 'round';
-        
-        // Optymalizacja: Rysuj poświatę tylko dla najbardziej widocznych linii
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+
         if (line.opacity > 0.4) {
           ctx.shadowBlur = 8;
           ctx.shadowColor = color;
         }
-        
+
         const endX = line.x + Math.cos(line.angle) * line.length;
         const endY = line.y + Math.sin(line.angle) * line.length;
 
         ctx.moveTo(line.x, line.y);
         ctx.lineTo(endX, endY);
         ctx.stroke();
-        
         ctx.shadowBlur = 0;
 
         line.x += Math.cos(line.angle) * line.speed;
@@ -91,18 +98,27 @@ const FloatingLines: React.FC<FloatingLinesProps> = ({
       animationFrameId = requestAnimationFrame(draw);
     };
 
+    const onVisibilityChange = () => {
+      isVisible = document.visibilityState === "visible";
+    };
+
+    window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    resize();
     draw();
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
   }, [color, count, minSpeed, maxSpeed]);
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
+      aria-hidden="true"
     />
   );
 };
