@@ -45,11 +45,6 @@ npm run dev
 
 ---
 
-## 📸 PREVIEW
-*(Add your screenshot here after hosting)*
-
----
-
 <p align="center">
   Built with 🦾 by <b>Kwiot31</b>
 </p>
