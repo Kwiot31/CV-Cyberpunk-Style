@@ -20,7 +20,7 @@ export const translations: Translations = {
     },
     about: {
       quote: "Specjalista IT z ponad 3-letnim doświadczeniem w wsparciu aplikacji krytycznych i administracji systemami.",
-      text: "Specjalista IT z ponad 3-letnim doświadczeniem we wsparciuaplikacji krytycznych i administracji systemami. Łączę wiedzę zzakresu systemów Linux/Windows, baz danych oraz monitoringu zpraktyczną znajomością technologii kontenerowych i podejściaGitOps. Dążę do dalszego rozwoju w obszarze automatyzacjiprocesów IT oraz zaawansowanej administracji."
+      text: "Specjalista IT z ponad 3-letnim doświadczeniem we wsparciuaplikacji krytycznych i administracji systemami. Łączę wiedzę zzakresu systemów Linux/Windows, baz danych oraz monitoringu zpraktyczną znajomością technologii kontenerowych i podejścia GitOps. Dążę do dalszego rozwoju w obszarze automatyzacjiprocesów IT oraz zaawansowanej administracji."
     },
     interests: {
       tech: { title: "AI i Technologie", desc: "Pasja do AI, nowych technologii i newsów tech" },
