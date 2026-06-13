@@ -20,7 +20,7 @@ export const translations: Translations = {
     },
     about: {
       quote: "Specjalista IT z ponad 3-letnim doświadczeniem w wsparciu aplikacji krytycznych i administracji systemami.",
-      text: "Łączę wiedzę z zakresu Linux/Windows, baz danych (SQL, Oracle) oraz monitoringu z praktyczną znajomością ekosystemu Kubernetes i ArgoCD. Dążę do rozwoju w kierunku Administracji Systemami i automatyzacji procesów IT. \n\nPosiadam solidne podstawy z informatyki oraz ukończyłem studia na kierunkach Zarządzanie i Inżynieria Produkcji oraz Towaroznawstwo. Nauczyło mnie to systemowego podejścia do jakości i efektywności. Łączę wiedzę techniczną z praktycznym podejściem, skutecznie wspierając rozwój projektów IT."
+      text: "Specjalista IT z ponad 3-letnim doświadczeniem we wsparciuaplikacji krytycznych i administracji systemami. Łączę wiedzę zzakresu systemów Linux/Windows, baz danych oraz monitoringu zpraktyczną znajomością technologii kontenerowych i podejściaGitOps. Dążę do dalszego rozwoju w obszarze automatyzacjiprocesów IT oraz zaawansowanej administracji."
     },
     interests: {
       tech: { title: "AI i Technologie", desc: "Pasja do AI, nowych technologii i newsów tech" },
