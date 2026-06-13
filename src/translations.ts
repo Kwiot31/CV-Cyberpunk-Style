@@ -79,6 +79,7 @@ export const translations: Translations = {
       methods: "Metodyki i Normy: Agile, Scrum, ISO 27001, ISO 9001, Lean (Kaizen, 5S)."
     },
     certificates: [
+      "Zabbix - monitoring serwerów i aplikacji",
       "ISTQB Certified Tester - poziom podstawowy",
       "Kurs audytora wewnętrznego ISO 9001",
       "ISO 27001 Cybersecurity manage"
@@ -180,6 +181,7 @@ export const translations: Translations = {
       methods: "Methodologies & Standards: Agile, Scrum, ISO 27001, ISO 9001, Lean (Kaizen, 5S)."
     },
     certificates: [
+      "Zabbix - Server and Application Monitoring",
       "ISTQB Certified Tester - Foundation Level",
       "ISO 9001 Internal Auditor Course",
       "ISO 27001 Cybersecurity manage"
