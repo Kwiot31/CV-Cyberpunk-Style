@@ -122,7 +122,7 @@ export const translations: Translations = {
     },
     about: {
       quote: "IT Specialist with over 3 years of experience in critical application support and system administration.",
-      text: "I combine knowledge in Linux/Windows, databases (SQL, Oracle), and monitoring with practical experience in the Kubernetes and ArgoCD ecosystem. I aim to develop towards System Administration and IT process automation. \n\nI have a solid foundation in computer science and graduated in Management and Production Engineering as well as Commodity Science. This taught me a systemic approach to quality and efficiency. I combine technical knowledge with a practical approach, effectively supporting the development of IT projects."
+      text: "IT Specialist with 3+ years of experience in critical applicationsupport and systems administration. Combining expertise inLinux/Windows environments, databases, and monitoring withhands-on experience in containerization and GitOps practices.Focused on further growth in IT process automation and advancedsystems administration"
     },
     interests: {
       tech: { title: "AI & Tech", desc: "Passion for AI, new technology, and tech news" },
