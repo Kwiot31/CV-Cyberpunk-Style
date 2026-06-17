@@ -32,7 +32,7 @@ export const translations: Translations = {
         role: "Service-Desk",
         company: "Aplikacje Krytyczne Sp. z o.o.",
         period: "2023 - Obecnie",
-        description: "Administrowanie i rozwiązywanie problemów w środowiskach Linux oraz Windows. Monitorowanie infrastruktury przy użyciu narzędzi Zabbix, Grafana i Nagios oraz analiza logów systemowych. Monitorowanie dostępności mikrousług na klastrach Kubernetes, zarządzanie wdrożeniami GitOps w ArgoCD oraz kompleksowa diagnostyka i troubleshooting błędów w środowiskach kontenerowych. Weryfikacja spójności danych oraz wykonywanie zapytań SQL w bazach Oracle, MS SQL i PostgreSQL na potrzeby rozwiązywania zgłoszeń. Zarządzanie pełnym cyklem życia zgłoszeń oraz przygotowywanie raportów technicznych i wniosków dotyczących optymalizacji infrastruktury IT.",
+        description: "Administrowanie i rozwiązywanie problemów w środowiskach Linux oraz Windows. Monitorowanie infrastruktury przy użyciu narzędzi Zabbix, Grafana i Nagios oraz analiza logów systemowych. Monitorowanie dostępności mikrousług na klastrach Kubernetes, zarządzanie wdrożeniami GitOps w ArgoCD oraz kompleksowa diagnostyka i troubleshooting błędów w środowiskach kontenerowych. Weryfikacja spójności danych oraz wykonywanie zapytań SQL w bazach MS SQL i PostgreSQL na potrzeby rozwiązywania zgłoszeń. Zarządzanie pełnym cyklem życia zgłoszeń oraz przygotowywanie raportów technicznych i wniosków dotyczących optymalizacji infrastruktury IT.",
         skills: ["Linux", "Windows Server", "Kubernetes", "ArgoCD", "GitOps", "Ansible", "Helm", "Docker", "SQL", "PostgreSQL", "Zabbix", "Grafana", "Nagios"]
       },
       {
@@ -134,7 +134,7 @@ export const translations: Translations = {
         role: "Service-Desk",
         company: "Aplikacje Krytyczne Sp. z o.o.",
         period: "2023 - Present",
-        description: "Administrating and solving problems in Linux and Windows environments. Monitoring infrastructure using Zabbix, Grafana, and Nagios tools, and system log analysis. Monitoring microservices availability on Kubernetes clusters, managing GitOps deployments in ArgoCD, and complex diagnostics and troubleshooting in containerized environments. Verifying data consistency and performing SQL queries in Oracle, MS SQL, and PostgreSQL databases for ticket resolution. Managing the full ticket lifecycle and preparing technical reports and infrastructure optimization requests.",
+        description: "Administrating and solving problems in Linux and Windows environments. Monitoring infrastructure using Zabbix, Grafana, and Nagios tools, and system log analysis. Monitoring microservices availability on Kubernetes clusters, managing GitOps deployments in ArgoCD, and complex diagnostics and troubleshooting in containerized environments. Verifying data consistency and performing SQL queries in MS SQL, and PostgreSQL databases for ticket resolution. Managing the full ticket lifecycle and preparing technical reports and infrastructure optimization requests.",
         skills: ["Linux", "Windows Server", "Kubernetes", "ArgoCD", "GitOps", "Ansible", "Helm", "Docker", "SQL", "PostgreSQL", "Zabbix", "Grafana", "Nagios"]
       },
       {
